@@ -1,7 +1,8 @@
 name: Build and Push Docker Images
 on:
-  
-  workflow_call:
+
+  #workflow_call:
+  workflow_dispatch:
     inputs:
       image:
         type: string
@@ -83,9 +84,9 @@ jobs:
       matrix:
         include:
           - arch: amd64
-            runner: GHA-Hosted-8x32
-          - arch: arm64
-            runner: GHA-Hosted-8x32-arm64
+            runner: ubuntu-latest
+          # - arch: arm64
+          #   runner: GHA-Hosted-8x32-arm64
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Checkout code
