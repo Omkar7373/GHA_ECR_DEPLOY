@@ -12,7 +12,7 @@ inputs:
   dockerfile:
     description: The path to the Dockerfile
     required: true
-    default: stubs/notion/Dockerfile
+    default: ./stubs/notion/Dockerfile
   commit_sha:
     description: Specific commit SHA to build from
     required: true
