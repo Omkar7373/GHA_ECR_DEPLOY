@@ -1,8 +1,9 @@
 name: Build and Push Docker Image
 description: Build and push a Docker image to Amazon ECR
 
+on:
 workflow_dispatch:
- inputs:
+inputs:
   image:
     description: Image name
     required: true
@@ -29,12 +30,12 @@ workflow_dispatch:
     description: The architecture to build for (exactly one of amd64 or arm64)
     required: true
 
- outputs:
+outputs:
   tag:
     description: The tag of the Docker image
     value: ${{ steps.save-output.outputs.tag }}
 
- runs:
+runs:
   using: composite
   steps:
     - name: Login to Amazon ECR Private
