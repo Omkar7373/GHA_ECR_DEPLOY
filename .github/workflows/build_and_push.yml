@@ -30,6 +30,8 @@ on:
         required: false
         default: ""
 
+  workflow_dispatch:
+
 jobs:
   prepare:
     name: Prepare Build for Docker Image ${{ inputs.image }}
