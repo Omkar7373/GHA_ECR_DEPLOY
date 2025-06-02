@@ -1,36 +1,35 @@
 name: Build and Push Docker Images
 on:
 
-  workflow_dispatch:
-  # workflow_call:
-  #   inputs:
-  #     image:
-  #       type: string
-  #       required: true
-  #     context:
-  #       type: string
-  #       required: true
-  #     dockerfile:
-  #       type: string
-  #       required: true
-  #     commit_sha:
-  #       description: Specific commit SHA to build from
-  #       type: string
-  #       required: true
-  #     build-args:
-  #       type: string
-  #       default: ""
-  #     skip-libs:
-  #       type: boolean
-  #       default: false
-  #     push:
-  #       type: boolean
-  #       default: false
-  #     tag_list:
-  #       description: Comma-separated list of tags to apply to the image
-  #       type: string
-  #       required: false
-  #       default: ""
+  workflow_call:
+    inputs:
+      image:
+        type: string
+        required: true
+      context:
+        type: string
+        required: true
+      dockerfile:
+        type: string
+        required: true
+      commit_sha:
+        description: Specific commit SHA to build from
+        type: string
+        required: true
+      build-args:
+        type: string
+        default: ""
+      skip-libs:
+        type: boolean
+        default: false
+      push:
+        type: boolean
+        default: false
+      tag_list:
+        description: Comma-separated list of tags to apply to the image
+        type: string
+        required: false
+        default: ""
 
 
 jobs:
