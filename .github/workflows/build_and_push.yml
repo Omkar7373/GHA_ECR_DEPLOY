@@ -88,8 +88,8 @@ jobs:
         include:
           - arch: amd64
             runner: ubuntu-latest
-          # - arch: arm64
-          #   runner: GHA-Hosted-8x32-arm64
+          - arch: arm64
+            runner: ubuntu-latest
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Checkout code
