@@ -1,11 +1,7 @@
 name: Build and Push Docker Images
 on:
 
-  push:
-    branches:
-      - main  
-
-  workflow_call:
+  workflow_dispatch:
     inputs:
       image:
         type: string
@@ -34,6 +30,9 @@ on:
         type: string
         required: false
         default: ""
+      arch:
+        description: The architecture to build for (exactly one of amd64 or arm64)
+        required: true
 
 
 jobs:
