@@ -13,10 +13,12 @@ permissions:
   contents: read
 
 jobs:
-  build-chat-agent:
-    name: Build and Push Chat Agent Docker Image
+  build-notion-agent:
+    name: Build and Push notion Docker Image
     uses: ./.github/workflows/build_and_push.yml
     with:
       image: notion-image
       context: stubs/notion
       dockerfile: stubs/notion/Dockerfile
+      commit_sha: ${{ inputs.commit_sha }}
+      arch: ${{ inputs.arch }}

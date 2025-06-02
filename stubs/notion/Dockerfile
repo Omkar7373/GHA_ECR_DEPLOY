@@ -5,4 +5,4 @@ COPY src/ ./src/
 
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONPATH=/app:/app/src
-CMD ["python ./src/mcp_notion/server.py"]
+CMD ["python", "./src/mcp_notion/server.py"]
