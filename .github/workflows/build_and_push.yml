@@ -119,6 +119,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEYID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEYID }}
+          audience: sts.amazonaws.com
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
@@ -159,6 +160,7 @@ jobs:
   #       with:
   #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEYID }}
   #         aws-secret-access-key: ${{ secrets.AWS_SECRET_KEYID }}
+  #         audience: sts.amazonaws.com
   #         aws-region: ${{ secrets.AWS_REGION }}
   #     - name: Login to Amazon ECR
   #       uses: aws-actions/amazon-ecr-login@v2
