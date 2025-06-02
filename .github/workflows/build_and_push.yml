@@ -1,7 +1,7 @@
 name: Build and Push Docker Images
 on:
 
-  workflow_dispatch:
+  workflow_call:
     # inputs:
     #   image:
     #     type: string
@@ -33,7 +33,55 @@ on:
     #   arch:
     #     description: The architecture to build for (exactly one of amd64 or arm64)
     #     required: true
+   inputs:
+      image:
+        description: Image name
+        type: string
+        required: true
 
+      context:
+        description: Docker build context directory
+        type: string
+        required: true
+
+      dockerfile:
+        description: Path to the Dockerfile
+        type: string
+        required: true
+
+      commit_sha:
+        description: Specific commit SHA to build from
+        type: string
+        required: true
+
+      build-args:
+        description: Build arguments to pass to the Dockerfile (new-line delimited string)
+        type: string
+        required: false
+        default: ""
+
+      skip-libs:
+        description: Whether to skip installing libraries
+        type: boolean
+        required: false
+        default: false
+
+      push:
+        description: Whether to push the image to registry
+        type: boolean
+        required: false
+        default: false
+
+      tag_list:
+        description: Comma-separated list of tags to apply to the image
+        type: string
+        required: false
+        default: ""
+
+      arch:
+        description: The architecture to build for (amd64 or arm64)
+        type: string
+        required: true
 
 jobs:
   prepare:
@@ -105,7 +153,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
-        # id: ecr-login
+        id: ecr-login
       - name: output the githbub actions build info
         run: |
           echo "VERSION=${{ needs.prepare.outputs.commit_sha }}"
@@ -145,7 +193,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
-        # id: ecr-login
+        id: ecr-login
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Docker meta

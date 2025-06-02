@@ -70,7 +70,7 @@ runs:
   using: composite
   steps:
     - name: Login to Amazon ECR Private
-      # id: login-ecr
+      id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
     - name: Extract Docker image metadata
       id: meta
