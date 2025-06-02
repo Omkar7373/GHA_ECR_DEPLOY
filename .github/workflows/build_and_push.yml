@@ -1,6 +1,7 @@
 name: Build and Push Docker Images
 on:
 
+  workflow_dispatch:
   # workflow_call:
   #   inputs:
   #     image:
@@ -30,9 +31,7 @@ on:
   #       type: string
   #       required: false
   #       default: ""
-  push:
-    branches:
-      - main
+
 
 jobs:
   prepare:
