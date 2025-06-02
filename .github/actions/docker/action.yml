@@ -29,10 +29,10 @@ workflow_call:
       description: The architecture to build for (exactly one of amd64 or arm64)
       required: true
 
-  outputs:
-    tag:
-      description: The tag of the Docker image
-      value: ${{ steps.save-output.outputs.tag }}
+  # outputs:
+  #   tag:
+  #     description: The tag of the Docker image
+  #     value: ${{ steps.save-output.outputs.tag }}
 
 runs:
   using: composite
