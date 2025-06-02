@@ -2,37 +2,37 @@ name: Build and Push Docker Images
 on:
 
   workflow_dispatch:
-    inputs:
-      image:
-        type: string
-        required: true
-      context:
-        type: string
-        required: true
-      dockerfile:
-        type: string
-        required: true
-      commit_sha:
-        description: Specific commit SHA to build from
-        type: string
-        required: true
-      build-args:
-        type: string
-        default: ""
-      skip-libs:
-        type: boolean
-        default: false
-      push:
-        type: boolean
-        default: false
-      tag_list:
-        description: Comma-separated list of tags to apply to the image
-        type: string
-        required: false
-        default: ""
-      arch:
-        description: The architecture to build for (exactly one of amd64 or arm64)
-        required: true
+    # inputs:
+    #   image:
+    #     type: string
+    #     required: true
+    #   context:
+    #     type: string
+    #     required: true
+    #   dockerfile:
+    #     type: string
+    #     required: true
+    #   commit_sha:
+    #     description: Specific commit SHA to build from
+    #     type: string
+    #     required: true
+    #   build-args:
+    #     type: string
+    #     default: ""
+    #   skip-libs:
+    #     type: boolean
+    #     default: false
+    #   push:
+    #     type: boolean
+    #     default: false
+    #   tag_list:
+    #     description: Comma-separated list of tags to apply to the image
+    #     type: string
+    #     required: false
+    #     default: ""
+    #   arch:
+    #     description: The architecture to build for (exactly one of amd64 or arm64)
+    #     required: true
 
 
 jobs:
@@ -113,7 +113,7 @@ jobs:
           echo "TAG_LIST=${{ inputs.tag_list }}"
       - name: Build and push docker image
         id: docker
-        uses: ./.github/actions/docker
+        uses: ./.github/actions/docker/action.yml
         with:
           image: ${{ inputs.image }}
           dockerfile: ${{ inputs.dockerfile }}
