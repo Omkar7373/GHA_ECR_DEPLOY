@@ -1,4 +1,4 @@
-name: Demo CI/CD
+name: Notion CI/CD
 
 on:
   workflow_call:
@@ -8,6 +8,8 @@ on:
         description: Whether to push the image to the registry
         default: false
         required: false
+  push:
+    branches: ["main"]
 
 permissions:
   id-token: write
