@@ -35,12 +35,12 @@ inputs:
   context:
     description: The context for the docker build (build directory)
     required: true
-    default: .
+    default: stubs/notion/src/mcp_notion/
     type: string
   dockerfile:
     description: The path to the Dockerfile
     required: true
-    default: Dockerfile
+    default: stubs/notion/src/mcp_notion/Dockerfile
     type: string
   commit_sha:
     description: Specific commit SHA to build from
