@@ -35,7 +35,7 @@ inputs:
   context:
     description: The context for the docker build (build directory)
     required: true
-    default: stubs/notion/src/mcp_notion/
+    default: .
     type: string
   dockerfile:
     description: The path to the Dockerfile
