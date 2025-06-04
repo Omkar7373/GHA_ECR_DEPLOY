@@ -43,7 +43,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.commit_sha }}
-          fetch-depth: 1  # Only need the specific commit
+          fetch-depth: 0  # Only need the specific commit
       - name: Set commit SHA
         id: set-sha
         run: |
