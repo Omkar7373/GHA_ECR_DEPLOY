@@ -112,6 +112,9 @@ jobs:
           echo "Dockerfile: ${{ inputs.dockerfile }}"
           ls -l ${{ inputs.context }}
           ls -l ${{ inputs.context }}/${{ inputs.dockerfile }}
+      - name: Debug list files in Docker context
+        shell: bash
+        run: ls -la stubs/notion
       - name: Build and push docker image
         id: docker
         uses: ./.github/actions/docker
