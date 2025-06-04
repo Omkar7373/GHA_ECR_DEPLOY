@@ -8,7 +8,7 @@ inputs:
   context:
     description: The context for the docker build (build directory)
     required: true
-    default: stubs/notion
+    default: .
   dockerfile:
     description: The path to the Dockerfile
     required: true
@@ -52,11 +52,9 @@ runs:
       id: build
       uses: docker/build-push-action@v6
       with:
-        # context: ${{ inputs.context }}
-        context: stubs/notion
+        context: ${{ inputs.context }}
         build-args: ${{ inputs.build-args }}
-        # file: ${{ inputs.dockerfile }}
-        file: Dockerfile
+        file: ${{ inputs.dockerfile }}
         tags: 750187922702.dkr.ecr.ap-south-1.amazonaws.com/lerndemo/${{ inputs.image }}
         push: ${{ inputs.push }}
         platforms: linux/${{ inputs.arch }}
