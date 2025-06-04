@@ -46,7 +46,7 @@ runs:
         images: 750187922702.dkr.ecr.ap-south-1.amazonaws.com/lerndemo/${{ inputs.image }}
         labels: |
           org.opencontainers.image.revision=${{ inputs.commit_sha }}
-    - name: Debug: list files in Docker context
+    - name: Debug list files in Docker context
       run: ls -la stubs/notion
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
