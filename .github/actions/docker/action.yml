@@ -56,7 +56,7 @@ runs:
         build-args: ${{ inputs.build-args }}
         file: ${{ inputs.dockerfile }}
         tags: 750187922702.dkr.ecr.ap-south-1.amazonaws.com/lerndemo/${{ inputs.image }}
-        # push: ${{ inputs.push }}
+        push: ${{ inputs.push }}
         platforms: linux/${{ inputs.arch }}
         provenance: false
         labels: ${{ steps.meta.outputs.labels }}

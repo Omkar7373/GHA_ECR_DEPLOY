@@ -53,7 +53,7 @@ jobs:
     with:
       image: notion
       context: stubs/notion
-      dockerfile: Dockerfile
+      dockerfile: .
       push: ${{ inputs.push || (github.event_name == 'push' && github.ref == 'refs/heads/main') }}
       commit_sha: ${{ github.sha }}
     secrets: inherit
