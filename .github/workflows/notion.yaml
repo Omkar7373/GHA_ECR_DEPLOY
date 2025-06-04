@@ -1,64 +1,74 @@
-name: Build and Push notion Docker Image
+name: Demo CI/CD
 
 on:
-  workflow_dispatch:
-   inputs:
-      image:
-        description: Image name
-        type: string
-        required: true
-
-      context:
-        description: Docker build context directory
-        type: string
-        required: true
-
-      dockerfile:
-        description: Path to the Dockerfile
-        type: string
-        required: true
-
-      commit_sha:
-        description: Specific commit SHA to build from
-        type: string
-        required: true
-
-      build-args:
-        description: Build arguments to pass to the Dockerfile (new-line delimited string)
-        type: string
-        required: false
-        default: ""
-
-      skip-libs:
-        description: Whether to skip installing libraries
-        type: boolean
-        required: false
-        default: false
-
+  workflow_call:
+    inputs:
       push:
-        description: Whether to push the image to registry
         type: boolean
-        required: false
+        description: Whether to push the image to the registry
         default: false
-
-      tag_list:
-        description: Comma-separated list of tags to apply to the image
-        type: string
         required: false
-        default: ""
 
-      arch:
-        description: The architecture to build for (amd64 or arm64)
-        type: string
-        required: true
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
-  build-notion-agent:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install UV
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+    # - name: Install dependencies
+    #   run: |
+    #     cd mcp-servers/fastmcp/mcp-salesforce
+    #     uv sync
+
+    # - name: Run tests
+    #   run: |
+    #     cd mcp-servers/fastmcp/mcp-salesforce
+    #     uv run pytest
+
+    # - name: Run linting
+    #   run: |
+    #     cd mcp-servers/fastmcp/mcp-salesforce
+    #     uv run ruff check .
+
+  build:
     name: Build and Push notion Docker Image
+    needs: test
     uses: ./.github/workflows/build_and_push.yml
     with:
-      image: notion-image
-      context: stubs/notion
-      dockerfile: stubs/notion/Dockerfile
-      commit_sha: ${{ inputs.commit_sha }}
-      arch: amd64
+      image: notion
+      context: stubs/notion/mcp_notion
+      dockerfile: stubs/notion/mcp_notion//Dockerfile
+      push: ${{ inputs.push || (github.event_name == 'push' && github.ref == 'refs/heads/main') }}
+      commit_sha: ${{ github.sha }}
+    secrets: inherit
+
+#   deploy-salesforce-dev:
+#     name: Deploy Salesforce to Dev
+#     uses: ./.github/workflows/deploy_helm_to_eks.yml
+#     needs: build
+#     if: ${{ github.ref == 'refs/heads/main' }}
+#     with:
+#       app_name: mcp-salesforce
+#       chart_version: 0.1.0
+#       chart_path: ./charts
+#       chart_name: http-api
+#       environment: dev
+#       # Eventually we will have other categories of mcp servers, so we will need to group them together into a different
+#       # namespace. For now, just use the mcp-barndoor namespace.
+#       namespace: mcp-barndoor
+#       values_file: environment/mcp/mcp-salesforce/dev.yaml
+#       tag: ${{ github.sha }}
