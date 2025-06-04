@@ -52,8 +52,8 @@ jobs:
     uses: ./.github/workflows/build_and_push.yml
     with:
       image: notion
-      context: stubs/notion/mcp_notion
-      dockerfile: stubs/notion/mcp_notion//Dockerfile
+      context: stubs/notion/src/mcp_notion
+      dockerfile: stubs/notion/src/mcp_notion//Dockerfile
       push: ${{ inputs.push || (github.event_name == 'push' && github.ref == 'refs/heads/main') }}
       commit_sha: ${{ github.sha }}
     secrets: inherit
