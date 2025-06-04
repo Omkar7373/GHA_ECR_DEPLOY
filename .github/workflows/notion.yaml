@@ -52,12 +52,11 @@ jobs:
     uses: ./.github/workflows/build_and_push.yml
     with:
       image: notion
-      context: ./stubs/notion
-      dockerfile: Dockerfile
+      context: stubs/notion
+      dockerfile: stubs/notion/Dockerfile
       push: ${{ inputs.push || (github.event_name == 'push' && github.ref == 'refs/heads/main') }}
       commit_sha: ${{ github.sha }}
     secrets: inherit
-
 #   deploy-salesforce-dev:
 #     name: Deploy Salesforce to Dev
 #     uses: ./.github/workflows/deploy_helm_to_eks.yml
