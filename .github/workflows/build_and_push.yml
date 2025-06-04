@@ -108,7 +108,7 @@ jobs:
           echo "TAG_LIST=${{ inputs.tag_list }}"
       - name: Build and push docker image
         id: docker
-        uses: ./.github/actions/docker/
+        uses: ./.github/actions/docker
         with:
           image: ${{ inputs.image }}
           dockerfile: ${{ inputs.dockerfile }}
