@@ -1,0 +1,23 @@
+[project]
+name = "mcp-notion"
+version = "0.1.0"
+description = "MCP server for Notion API"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastmcp>=2.0.0",
+    "httpx>=0.24.0",
+    "pyyaml>=6.0",
+]
+
+[project.scripts]
+mcp-notion = "mcp_notion.server:main"
+mcp-notion-http = "mcp_notion.app:main"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["mcp_notion"]
+package-dir = {"" = "src"}
