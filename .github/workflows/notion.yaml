@@ -35,6 +35,7 @@ jobs:
       run: |
         cd stubs/notion
         uv sync
+        pip install ruff
 
     # - name: Run tests
     #   run: |
